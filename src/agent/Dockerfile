@@ -1,5 +1,6 @@
 # AgentCore Dockerfile for Call Center Training Agent
 # Uses Python 3.13 with uv for fast dependency installation
+# Build timestamp: 2026-09-29T10:30:00Z - force rebuild
 
 FROM ghcr.io/astral-sh/uv:python3.13-bookworm
 

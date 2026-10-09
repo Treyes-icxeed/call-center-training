@@ -54,10 +54,12 @@ export class CoreInfraStack extends cdk.Stack {
     // ========================================
     // VPC Configuration
     // ========================================
+    // Bedrock AgentCore only supports specific AZs: us-east-1a, us-east-1c
+    // (az4, az1, az2 in the physical mapping). We explicitly set AZs to avoid unsupported zones.
     this.vpc = new ec2.Vpc(this, 'TrainingAgentVpc', {
       ipAddresses: ec2.IpAddresses.cidr(config.vpcConfig.vpcCidr),
-      maxAzs: config.vpcConfig.maxAzs,
       natGateways: config.vpcConfig.natGateways,
+      availabilityZones: ['us-east-1a', 'us-east-1c'],  // Supported by Bedrock AgentCore
       subnetConfiguration: [
         {
           cidrMask: 24,

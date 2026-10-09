@@ -114,9 +114,11 @@ export class WebUIStack extends cdk.Stack {
     });
 
     // User Pool Domain for hosted UI
+    // Note: Domain prefix must be lowercase alphanumeric with hyphens only
+    const sanitizedAccount = (this.account || '').replace(/[^a-z0-9-]/gi, '').toLowerCase();
     const userPoolDomain = this.userPool.addDomain('UserPoolDomain', {
       cognitoDomain: {
-        domainPrefix: `call-center-training-web-${this.account}`.toLowerCase(),
+        domainPrefix: `call-center-training-web-${sanitizedAccount}`,
       },
     });
 

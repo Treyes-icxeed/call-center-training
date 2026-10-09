@@ -18,7 +18,7 @@ from fastapi.responses import JSONResponse
 sys.path.insert(0, '/app')
 
 from strands.experimental.bidi.agent import BidiAgent
-from strands.experimental.bidi.models.nova_sonic import BidiNovaSonicModel
+from strands.experimental.bidi.models import BedrockNovaSonicModel
 from src.config.models import NOVA_SONIC_MODEL_ID
 from src.config.user_agent import boto_config
 from src.scenarios.loader import ScenarioLoader
@@ -199,16 +199,13 @@ async def websocket_endpoint(websocket: WebSocket):
             # --- Single-agent mode (original flow) ---
             locale_voice = get_locale_voice_id(voice_id, language_mode)
             logger.info(f"Using locale-prefixed voice: {locale_voice}")
-            model = BidiNovaSonicModel(
-                region=aws_region,
+            model = BedrockNovaSonicModel(
                 model_id=NOVA_SONIC_MODEL_ID,
-                provider_config={
-                    "audio": {
-                        "input_rate": 16000,
-                        "output_rate": 24000,
-                        "voice": locale_voice,
-                    }
+                audio={
+                    "input": {"sample_rate": 16000},
+                    "output": {"sample_rate": 24000},
                 },
+                voice=locale_voice,
             )
 
             agent = BidiAgent(

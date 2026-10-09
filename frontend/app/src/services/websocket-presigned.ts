@@ -10,7 +10,7 @@ import { SignatureV4 } from '@smithy/signature-v4';
 import { Sha256 } from '@aws-crypto/sha256-browser';
 import { HttpRequest } from '@smithy/protocol-http';
 
-const region = import.meta.env.VITE_AWS_REGION || 'us-west-2';
+const region = import.meta.env.VITE_AWS_REGION || 'us-east-1';
 const agentRuntimeArn = import.meta.env.VITE_AGENT_RUNTIME_ARN;
 
 export interface WebSocketConfig {

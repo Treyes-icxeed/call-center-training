@@ -6,7 +6,7 @@ export const awsconfig = {
     Cognito: {
       userPoolId: import.meta.env.VITE_USER_POOL_ID || '',
       userPoolClientId: import.meta.env.VITE_USER_POOL_CLIENT_ID || '',
-      identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID || 'us-west-2:d6b3d3bb-d342-4d7a-87fd-07f4aa18ee62',
+      identityPoolId: import.meta.env.VITE_IDENTITY_POOL_ID || 'us-east-1:94571323-80e1-4d15-b576-de8ec2508d40',
       loginWith: {
         oauth: {
           domain: import.meta.env.VITE_USER_POOL_DOMAIN || '',

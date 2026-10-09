@@ -6,7 +6,7 @@
 import { fetchAuthSession } from 'aws-amplify/auth';
 import { S3Client, PutObjectCommand } from '@aws-sdk/client-s3';
 
-const region = import.meta.env.VITE_AWS_REGION || 'us-west-2';
+const region = import.meta.env.VITE_AWS_REGION || 'us-east-1';
 
 /**
  * Upload a screen recording video to S3.

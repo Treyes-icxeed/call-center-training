@@ -10,7 +10,7 @@ from datetime import datetime
 from typing import Any, Callable, Dict, List, Optional
 
 from strands.experimental.bidi.agent import BidiAgent
-from strands.experimental.bidi.models.nova_sonic import BidiNovaSonicModel
+from strands.experimental.bidi.models import BedrockNovaSonicModel
 from strands.tools.decorator import tool
 from strands.types.tools import ToolContext
 
@@ -146,16 +146,13 @@ async def run_duo_session(
         voice = character_voices.get(char.id, char.voice)
         locale_voice = get_locale_voice_id(voice, language_mode)
         logger.info(f"Character {char.id}: using locale-prefixed voice {locale_voice}")
-        model = BidiNovaSonicModel(
-            region=aws_region,
+        model = BedrockNovaSonicModel(
             model_id=NOVA_SONIC_MODEL_ID,
-            provider_config={
-                "audio": {
-                    "input_rate": 16000,
-                    "output_rate": 24000,
-                    "voice": locale_voice,
-                }
+            audio={
+                "input": {"sample_rate": 16000},
+                "output": {"sample_rate": 24000},
             },
+            voice=locale_voice,
         )
         prompt = build_character_prompt(
             char,
